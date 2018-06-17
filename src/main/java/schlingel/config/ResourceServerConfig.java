@@ -19,7 +19,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     private String resourceIds;
 
     @Override
-    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+    public void configure(ResourceServerSecurityConfigurer resources){
         resources.resourceId(resourceIds).tokenServices(tokenServices);
     }
 
@@ -31,6 +31,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/actuator/**", "/api-docs/**").permitAll() // dont use actuator at the moment
                 //.antMatchers("/oauth/**").permitAll()
-                .antMatchers("/api/**" ).authenticated();
+                .antMatchers("/api/**" ).authenticated()
+        ;
     }
 }

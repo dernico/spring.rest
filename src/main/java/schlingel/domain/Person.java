@@ -1,4 +1,4 @@
-package schlingel;
+package schlingel.domain;
 
 import org.springframework.data.annotation.Id;
 
