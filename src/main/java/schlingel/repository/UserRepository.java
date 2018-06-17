@@ -1,6 +1,6 @@
-package hello.repository;
+package schlingel.repository;
 
-import hello.domain.User;
+import schlingel.domain.User;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, Long> {

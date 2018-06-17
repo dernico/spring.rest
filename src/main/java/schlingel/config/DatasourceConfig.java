@@ -1,9 +1,8 @@
-package hello.config;
+package schlingel.config;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -24,7 +23,7 @@ import java.beans.PropertyVetoException;
  */
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "hello.repository")
+@EnableJpaRepositories(basePackages = "schlingel.repository")
 public class DatasourceConfig {
 
     @Bean
@@ -43,7 +42,7 @@ public class DatasourceConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("datasource") DataSource ds) throws PropertyVetoException{
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setDataSource(ds);
-        entityManagerFactory.setPackagesToScan(new String[]{"hello.domain"});
+        entityManagerFactory.setPackagesToScan(new String[]{"schlingel.domain"});
         JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         entityManagerFactory.setJpaVendorAdapter(jpaVendorAdapter);
         return entityManagerFactory;

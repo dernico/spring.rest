@@ -1,4 +1,4 @@
-package hello.domain;
+package schlingel.domain;
 
 import javax.persistence.*;
 

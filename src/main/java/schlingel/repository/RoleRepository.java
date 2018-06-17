@@ -1,6 +1,6 @@
-package hello.repository;
+package schlingel.repository;
 
-import hello.domain.Role;
+import schlingel.domain.Role;
 import org.springframework.data.repository.CrudRepository;
 
 /**
