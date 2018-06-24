@@ -3,7 +3,9 @@ package schlingel.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by nydiarra on 06/05/17.
@@ -40,6 +42,18 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id",
                     referencedColumnName = "id"))
     private List<Role> roles;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            }
+//            ,mappedBy = "users"
+            )
+    @JoinTable(name = "user_todos",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "todo_id") })
+    private Set<Todo> todos = new HashSet<>();
 
     public Long getId() {
         return id;
