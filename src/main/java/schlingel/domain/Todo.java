@@ -1,5 +1,6 @@
 package schlingel.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -26,8 +27,7 @@ public class Todo {
     private String description;
 
 
-
-//    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,
@@ -35,9 +35,7 @@ public class Todo {
             }
             ,mappedBy = "todos"
     )
-//    @JoinTable(name = "user_todos",
-//            joinColumns = { @JoinColumn(name = "todo_id") },
-//            inverseJoinColumns = { @JoinColumn(name = "user_id") })
+//    @ManyToMany(mappedBy = "todos")
     private Set<User> users = new HashSet<>();
 
 

@@ -77,12 +77,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
         configurer
-                .jdbc(dataSource())
+                //.jddbc(dataSource())
+                .inMemory()
                 .withClient(clientId)
                 .secret(clientSecret)
                 .authorizedGrantTypes(grantType)
                 .scopes(scopeRead, scopeWrite)
-                .resourceIds(resourceIds);
+                .resourceIds(resourceIds)
+                ;
     }
 
     @Override

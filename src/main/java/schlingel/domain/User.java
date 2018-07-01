@@ -102,5 +102,13 @@ public class User {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+
+    public Set<Todo> getTodos() {
+        return todos;
+    }
+
+    public void setTodos(Set<Todo> todos) {
+        this.todos = todos;
+    }
 }
 
