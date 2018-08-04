@@ -1,8 +1,7 @@
 CREATE TABLE if not exists app_role (
   id bigserial primary key,
   description varchar(255) DEFAULT NULL,
-  role_name varchar(255) DEFAULT NULL,
-  PRIMARY KEY (id)
+  role_name varchar(255) DEFAULT NULL
 );
 
 
@@ -11,8 +10,7 @@ CREATE TABLE if not exists app_user (
   first_name varchar(255) NOT NULL,
   last_name varchar(255) NOT NULL,
   password varchar(255) NOT NULL,
-  username varchar(255) NOT NULL,
-  PRIMARY KEY (id)
+  username varchar(255) NOT NULL
 );
 
 
@@ -86,4 +84,18 @@ create table if not exists ClientDetails (
   refresh_token_validity INTEGER,
   additionalInformation VARCHAR(4096),
   autoApproveScopes VARCHAR(255)
+);
+
+
+create table if not exists todos (
+  id bigserial PRIMARY KEY,
+  title VARCHAR(255),
+  description VARCHAR(4096)
+);
+
+create table if not exists user_todos (
+    user_id bigserial ,
+    todo_id bigserial,
+    foreign key (user_id) references app_user(id),
+    foreign key (todo_id) references todos(id) ON DELETE CASCADE
 );

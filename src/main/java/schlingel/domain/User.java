@@ -15,6 +15,7 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @SequenceGenerator(name="user_generator", sequenceName = "user_seq", initialValue = 3)
     @Column(name = "id")
     private Long id;
 
@@ -43,6 +44,7 @@ public class User {
                     referencedColumnName = "id"))
     private List<Role> roles;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,

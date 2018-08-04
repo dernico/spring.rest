@@ -1,4 +1,5 @@
 select * from todos;
+--select * from app_role;
 --delete from user_todos;
 --delete from user_role;
 --delete from app_role;
@@ -18,3 +19,4 @@ select * from todos;
 --INSERT INTO user_role(user_id, role_id) VALUES(2,1);
 --INSERT INTO user_role(user_id, role_id) VALUES(2,2);
 --
+--commit;
