@@ -47,8 +47,6 @@ public class TodoController {
     public Set<Todo> postUserTodos(@RequestBody Todo todo){
         User user = currentUserService.getUserFromRequest();
         if(user != null){
-//            todo.getUsers().add(user.get());
-//            Todo newTodo = todoRepository.save(todo);
             user.getTodos().add(todo);
             User newUser = userRepository.save(user);
             return newUser.getTodos();

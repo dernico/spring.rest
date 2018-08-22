@@ -1,6 +1,7 @@
 package schlingel.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import schlingel.dto.UserDto;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -55,6 +56,7 @@ public class User {
     @JoinTable(name = "user_todos",
             joinColumns = { @JoinColumn(name = "user_id") },
             inverseJoinColumns = { @JoinColumn(name = "todo_id") })
+
     private Set<Todo> todos = new HashSet<>();
 
     public Long getId() {
