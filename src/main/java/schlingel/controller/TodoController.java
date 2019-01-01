@@ -10,9 +10,11 @@ import schlingel.repository.UserRepository;
 import schlingel.services.ICurrentUserService;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 
 @RestController
 public class TodoController {
@@ -31,7 +33,8 @@ public class TodoController {
     public List<Todo> getUserTodos(){
         User user = currentUserService.getUserFromRequest();
 
-        return todoRepository.findByUsers_Id(user.getId());
+        //return todoRepository.findByUsers_Id(user.getId());
+        return todoRepository.findAllByUsers_IdOrderById(user.getId());
 //        Set<Todo> todos = userRepository.findById(userid).get().getTodos();
 //        return todos;
     }
@@ -44,12 +47,33 @@ public class TodoController {
     }
 
     @PostMapping("/todos")
-    public Set<Todo> postUserTodos(@RequestBody Todo todo){
+    public Stream<Todo> postUserTodos(@RequestBody Todo todo){
         User user = currentUserService.getUserFromRequest();
         if(user != null){
             user.getTodos().add(todo);
             User newUser = userRepository.save(user);
-            return newUser.getTodos();
+            return newUser.getTodos().stream().sorted((o1, o2) -> {return o1.getId() > o2.getId() ? 1 : -1;});
+        }
+        return null;
+    }
+
+    @PatchMapping("/todos")
+    public Stream<Todo> patchUserTodos(@RequestBody Todo todo){
+        User user = currentUserService.getUserFromRequest();
+        if(user != null){
+            Todo updateTodo = user.getTodos()
+                    .stream()
+                    .filter(todo1 -> todo1.getId() == todo.getId())
+                    .findAny()
+                    .orElse(null);
+            //Optional<Todo> updateTodo = user.getTodos().stream().findFirst().filter(todo1 -> todo1.getId() == todo.getId());
+            if(updateTodo != null){
+                updateTodo.setDescription(todo.getDescription());
+                updateTodo.setTitle(todo.getTitle());
+                updateTodo.setDone(todo.isDone());
+                User newUser = userRepository.save(user);
+                return newUser.getTodos().stream().sorted((o1, o2) -> {return o1.getId() > o2.getId() ? 1 : -1;});
+            }
         }
         return null;
     }

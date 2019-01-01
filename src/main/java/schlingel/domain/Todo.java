@@ -26,6 +26,9 @@ public class Todo {
     @Column(columnDefinition = "text")
     private String description;
 
+    @Column()
+    private boolean done;
+
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,
@@ -69,5 +72,13 @@ public class Todo {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
     }
 }

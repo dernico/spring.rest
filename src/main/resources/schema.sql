@@ -90,7 +90,8 @@ create table if not exists ClientDetails (
 create table if not exists todos (
   id bigserial PRIMARY KEY,
   title VARCHAR(255),
-  description VARCHAR(4096)
+  description VARCHAR(4096),
+  done boolean
 );
 
 create table if not exists user_todos (
